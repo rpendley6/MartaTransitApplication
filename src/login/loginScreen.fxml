@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="login.LoginScreen">
+   <children>
+      <Label layoutX="327.0" layoutY="23.0" text="Login" AnchorPane.topAnchor="100.0">
+         <font>
+            <Font name="Bell MT" size="60.0" />
+         </font>
+      </Label>
+      <Label layoutX="252.0" layoutY="224.0" text="Username">
+         <font>
+            <Font name="Bell MT" size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="257.0" layoutY="261.0" text="Password">
+         <font>
+            <Font name="Bell MT" size="25.0" />
+         </font>
+      </Label>
+      <TextField fx:id="usernameField" layoutX="364.0" layoutY="224.0" />
+      <TextField fx:id="passwordField" layoutX="364.0" layoutY="260.0" />
+      <Button fx:id="loginButton" layoutX="494.0" layoutY="301.0" mnemonicParsing="false" onAction="#loginButtonAction" text="Login" />
+      <Label fx:id="errorMessage" layoutX="224.0" layoutY="196.0" text="Username or password are incorrect, please try again." textFill="RED" visible="false" AnchorPane.leftAnchor="223.0" AnchorPane.rightAnchor="223.0" />
+      <Button fx:id="backButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backButtonHandler" text="&lt; Back" />
+   </children>
+</AnchorPane>
