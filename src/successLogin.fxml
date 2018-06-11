@@ -6,9 +6,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SuccessLogin">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SuccessLogin">
    <children>
-      <Label layoutX="170.0" layoutY="190.0" text="Successful login, insert application here" />
+      <Label layoutX="270.0" layoutY="290.0" text="Successful login, insert application here" />
+      <Button fx:id="logoutButton" layoutX="718.0" layoutY="555.0" mnemonicParsing="false" onAction="#logoutButtonHandler" text="Logout" />
    </children>
 </AnchorPane>
