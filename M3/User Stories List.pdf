@@ -1,0 +1,12 @@
+User Stories
+
+As a MARTA rider, I want to view bus locations so that I can determine what time to arrive at the bus stop.
+As a MARTA rider, I want to view bus routes so that I can chose a route that will take me to my destination.
+As a MARTA rider, I want to view stops so that I can determine which one is currently closest to me.
+As an application admin, I want to be able to add routes, buses, and stops so that the simulation reflects the real-world MARTA bus system.
+As a an application admin, I want to be able to modify routes, buses, and stops so that the simulation displays correct information.
+As a simulation manager, I want to control how the simulation runs so that I can utilize it to identify potential problems in the bus system. 
+As an operations manager, I want to be able to label buses as “out of service” so that riders are not inconvenienced by inaccurate information in the simulation.
+As a security manager, I want to be able to remove accounts so that accounts that are no longer in use can be deleted, freeing storage space.
+As a simulation manager, I want to be able to pause the simulation so that I can prevent incorrect information from being distributed.
+As a security manager, I want to be able to grant privileges to certain users so that accounts will have the appropriate amount of access to the simulation.
