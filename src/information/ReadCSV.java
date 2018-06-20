@@ -1,3 +1,5 @@
+package information;
+
 import marta.Bus;
 import marta.Route;
 import marta.Stop;
@@ -7,11 +9,13 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
-public class readCSV {
+public class ReadCSV {
+
+    public static String CSVPATH = "C:\\Users\\Matth\\IdeaProjects\\teamdelta-marta\\src\\information\\MARTA Simulation All Data.csv";
+
     public static ArrayList<Bus> getBuses() {
-        String csvFileToRead = "MARTA Simulation All Data.csv";
+        String csvFileToRead = CSVPATH;
         BufferedReader br = null;
         String line = "";
         String splitBy = ",";
@@ -49,7 +53,7 @@ public class readCSV {
         return busArray;
     }
     public static ArrayList<Stop> getStops() {
-        String csvFileToRead = "MARTA Simulation All Data.csv";
+        String csvFileToRead = CSVPATH;
         BufferedReader br = null;
         String line = "";
         String splitBy = ",";
@@ -85,7 +89,7 @@ public class readCSV {
         return stopArray;
     }
     public static ArrayList<Route> getRoutes() {
-        String csvFileToRead = "MARTA Simulation All Data.csv";
+        String csvFileToRead = CSVPATH;
         BufferedReader br = null;
         String line = "";
         String splitBy = ",";
