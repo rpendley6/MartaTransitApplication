@@ -1,6 +1,7 @@
 package marta;
 
 import java.util.Objects;
+import java.util.Random;
 
 public class Bus {
     private int id;
@@ -8,6 +9,8 @@ public class Bus {
     private int location;
     private int riders;
     private int speed;
+    private int nextExit;
+    private int nextBoard;
 
     public Bus(int id, int route, int location, int riders, int speed) {
         this.id = id;
@@ -15,6 +18,8 @@ public class Bus {
         this.location = location;
         this.riders = riders;
         this.speed = speed;
+        nextExit = exit();
+        nextBoard = board();
     }
 
     @Override
@@ -27,9 +32,56 @@ public class Bus {
                 speed == bus.speed;
     }
 
+    /**
+     * Performs the changes on the riders based on the numbers generated and then generates
+     * a new set of nextExit and nextBoard numbers
+     */
+    public void arrive() {
+        riders -= nextExit;
+        riders += nextBoard;
+        nextExit = exit();
+        nextBoard = board();
+    }
+
+    /**
+     * Calculates the number exiting either random between 2 and 5(inclusive) or 2 and the current number of riders(inclusive)
+     * @return random int
+     */
+    public int exit() {
+        return riders < 5 ? randomNumber(2, riders) : randomNumber(2, 5);
+    }
+
+    /**
+     * Calculates the number boarding
+     * @return random int between 0 and 10
+     */
+    public int board() {
+        return randomNumber(0, 10);
+    }
+
+    /**
+     * Generates a random number between min and max (inclusive).
+     * @param min
+     * @param max
+     * @return random number
+     */
+    public int randomNumber(int min, int max){
+        Random rand = new Random();
+        int randomNumber = rand.nextInt((min - max) + 1) + min;
+        return randomNumber;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(id, route, location, riders, speed);
+    }
+
+    public int getNextExit() {
+        return nextExit;
+    }
+
+    public int getNextBoard() {
+        return nextBoard;
     }
 
     public int getId() {
