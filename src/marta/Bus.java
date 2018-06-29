@@ -3,6 +3,8 @@ package marta;
 import java.util.Objects;
 import java.util.Random;
 
+import static information.ReadCSV.getRoutes;
+
 public class Bus {
     private int id;
     private int route;
@@ -11,8 +13,9 @@ public class Bus {
     private int speed;
     private int nextExit;
     private int nextBoard;
+    private int stop;
 
-    public Bus(int id, int route, int location, int riders, int speed) {
+    public Bus(int id, int route, int location, int riders, int speed, int stop) {
         this.id = id;
         this.route = route;
         this.location = location;
@@ -20,6 +23,7 @@ public class Bus {
         this.speed = speed;
         nextExit = exit();
         nextBoard = board();
+        this.stop = stop;
     }
 
     @Override
@@ -69,6 +73,76 @@ public class Bus {
         Random rand = new Random();
         int randomNumber = rand.nextInt((min - max) + 1) + min;
         return randomNumber;
+    }
+
+    /**
+     *
+     * @return the id of the next stop on the route
+     */
+    public int getNextStop() {
+        Stop[] path = null;
+        Stop next = null;
+        for (Route r: getRoutes()) {
+            if (r.getId() == route) {
+                path = r.getPath();
+            }
+        }
+        for (int i = 0; i < path.length; i++) {
+            if (path[i].getId() == stop) {
+                if (i == path.length - 1) {
+                    next = path[0];
+                } else {
+                    next = path[i + 1];
+                }
+            }
+        }
+        return next.getId();
+    }
+
+    /**
+     *
+     * @return the distance between the current stop and next stop
+     */
+    public double distance() {
+        Stop[] path = null;
+        Stop next = null;
+        Stop current = null;
+        for (Route r: getRoutes()) {
+            if (r.getId() == route) {
+                path = r.getPath();
+            }
+        }
+        for (int i = 0; i < path.length; i++) {
+            if (path[i].getId() == stop) {
+                current = path[i];
+                if (i == path.length - 1) {
+                    next = path[0];
+                } else {
+                    next = path[i + 1];
+                }
+            }
+        }
+        double h = Math.abs(next.getLongitude() - current.getLongitude());
+        double w = Math.abs(next.getLatitude() - current.getLatitude());
+        return hypotenuse(h, w);
+    }
+
+    /**
+     *
+     * @return the time to travel to the next stop based on distance and speed
+     */
+    public double timeToNext() {
+        return distance() / speed;
+    }
+
+    /**
+     *
+     * @param h difference in latitude
+     * @param w difference in longitude
+     * @return hypotenuse of differences
+     */
+    public double hypotenuse(double h, double w) {
+        return Math.sqrt(h * h + w * w);
     }
 
     @Override
@@ -122,5 +196,13 @@ public class Bus {
 
     public void setSpeed(int speed) {
         this.speed = speed;
+    }
+
+    public int getStop() {
+        return stop;
+    }
+
+    public void setStop(int stop) {
+        this.stop = stop;
     }
 }
