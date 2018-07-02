@@ -14,8 +14,9 @@ public class Bus {
     private int nextExit;
     private int nextBoard;
     private int stop;
+    private int stopCount;
 
-    public Bus(int id, int route, int location, int riders, int speed, int stop) {
+    public Bus(int id, int route, int location, int riders, int speed, int stop, int stopCount) {
         this.id = id;
         this.route = route;
         this.location = location;
@@ -24,6 +25,7 @@ public class Bus {
         nextExit = exit();
         nextBoard = board();
         this.stop = stop;
+        this.stopCount = stopCount;
     }
 
     @Override
@@ -75,28 +77,36 @@ public class Bus {
         return randomNumber;
     }
 
+    public void moveStops() {
+        Stop[] path = null;
+        for (Route r: getRoutes()) {
+            if (r.getId() == route) {
+                path = r.getPath();
+            }
+        }
+        if (stopCount < path.length - 1) {
+            stopCount++;
+        } else {
+            stopCount = 0;
+        }
+        stop = getNextStop();
+    }
     /**
      *
      * @return the id of the next stop on the route
      */
     public int getNextStop() {
         Stop[] path = null;
-        Stop next = null;
         for (Route r: getRoutes()) {
             if (r.getId() == route) {
                 path = r.getPath();
             }
         }
-        for (int i = 0; i < path.length; i++) {
-            if (path[i].getId() == stop) {
-                if (i == path.length - 1) {
-                    next = path[0];
-                } else {
-                    next = path[i + 1];
-                }
-            }
+        if (stopCount < path.length - 1) {
+            return path[stopCount + 1].getId();
+        } else {
+            return path[0].getId();
         }
-        return next.getId();
     }
 
     /**
@@ -105,22 +115,17 @@ public class Bus {
      */
     public double distance() {
         Stop[] path = null;
-        Stop next = null;
+        Stop next;
         Stop current = null;
         for (Route r: getRoutes()) {
             if (r.getId() == route) {
                 path = r.getPath();
             }
         }
-        for (int i = 0; i < path.length; i++) {
-            if (path[i].getId() == stop) {
-                current = path[i];
-                if (i == path.length - 1) {
-                    next = path[0];
-                } else {
-                    next = path[i + 1];
-                }
-            }
+        if (stopCount < path.length - 1) {
+            next = path[stopCount + 1];
+        } else {
+            next = path[0];
         }
         double h = Math.abs(next.getLongitude() - current.getLongitude());
         double w = Math.abs(next.getLatitude() - current.getLatitude());

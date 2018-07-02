@@ -34,7 +34,8 @@ public class ReadCSV {
                     int riders = Integer.parseInt(data[4]);
                     int speed = Integer.parseInt(data[6]);
                     int stop = -1;
-                    Bus newBus = new Bus(id, route, location, riders, speed, stop);
+                    int stopCount = 0; //intitializes buses at beginning of route
+                    Bus newBus = new Bus(id, route, location, riders, speed, stop, stopCount);
                     busArray.add(newBus);
                 }
             }
