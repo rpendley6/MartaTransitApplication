@@ -10,6 +10,13 @@ public class BusInfo {
     @FXML Label locationLabel;
     @FXML Label riderLabel;
     @FXML Label speedLabel;
+    @FXML Label currentStopLabel;
+    @FXML Label nextStopLabel;
+    @FXML Label distanceToNextLabel;
+    @FXML Label timeUntilNextLabel;
+    @FXML Label numberExitingLabel;
+    @FXML Label numberBoardingLabel;
+    @FXML Label updatedCountLabel;
 
     public void initData(Bus pick) {
         idLabel.setText(String.valueOf(pick.getId()));
@@ -17,6 +24,15 @@ public class BusInfo {
         locationLabel.setText(String.valueOf(pick.getLocation()));
         riderLabel.setText(String.valueOf(pick.getRiders()));
         speedLabel.setText(String.valueOf(pick.getSpeed()));
+
+        currentStopLabel.setText(String.valueOf(pick.getStop()));
+        nextStopLabel.setText(String.valueOf(pick.getNextStop()));
+        timeUntilNextLabel.setText(String.valueOf(pick.timeToNext()));
+        distanceToNextLabel.setText(String.valueOf(pick.distance()));
+
+        numberExitingLabel.setText(String.valueOf(pick.getNextExit()));
+        numberBoardingLabel.setText(String.valueOf(pick.getNextBoard()));
+        updatedCountLabel.setText(String.valueOf(pick.getRiders() - pick.getNextExit() + pick.getNextBoard()));
     }
 
 }

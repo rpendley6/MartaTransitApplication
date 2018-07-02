@@ -54,7 +54,13 @@ public class Bus {
      * @return random int
      */
     public int exit() {
-        return riders < 5 ? randomNumber(2, riders) : randomNumber(2, 5);
+        if (riders < 5) {
+            if (riders < 2) {
+                return riders;
+            }
+            return randomNumber(2, riders);
+        }
+        return randomNumber(2, 5);
     }
 
     /**
@@ -73,7 +79,7 @@ public class Bus {
      */
     public int randomNumber(int min, int max){
         Random rand = new Random();
-        int randomNumber = rand.nextInt((min - max) + 1) + min;
+        int randomNumber = rand.nextInt((max - min) + 1) + min;
         return randomNumber;
     }
 
