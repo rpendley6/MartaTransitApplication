@@ -116,12 +116,12 @@ public class Bus {
     public double distance() {
         Stop[] path = null;
         Stop next;
-        Stop current = null;
         for (Route r: getRoutes()) {
             if (r.getId() == route) {
                 path = r.getPath();
             }
         }
+        Stop current = path[stopCount];
         if (stopCount < path.length - 1) {
             next = path[stopCount + 1];
         } else {
