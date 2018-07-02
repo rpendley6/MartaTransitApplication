@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class ReadCSV {
 
-    public static String CSVPATH = "C:\\Users\\Matthew\\Desktop\\TeamDelta Marta\\src\\information\\MARTA Simulation All Data.csv";
+    public static String CSVPATH = "C:\\Users\\rpend\\TeamDelta-marta\\src\\information\\MARTA Simulation All Data.csv";
 
 
     public static ArrayList<Bus> getBuses() {
@@ -34,6 +34,11 @@ public class ReadCSV {
                     int riders = Integer.parseInt(data[4]);
                     int speed = Integer.parseInt(data[6]);
                     int stop = -1;
+                    for (Route r: getRoutes()) {
+                        if (r.getId() == route) {
+                            stop = r.getPath()[0].getId();
+                        }
+                    }
                     int stopCount = 0; //intitializes buses at beginning of route
                     Bus newBus = new Bus(id, route, location, riders, speed, stop, stopCount);
                     busArray.add(newBus);
