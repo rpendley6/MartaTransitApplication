@@ -25,6 +25,11 @@ public class BusInfo {
         riderLabel.setText(String.valueOf(pick.getRiders()));
         speedLabel.setText(String.valueOf(pick.getSpeed()));
 
+        currentStopLabel.setText(String.valueOf(pick.getStop()));
+        nextStopLabel.setText(String.valueOf(pick.getNextStop()));
+        timeUntilNextLabel.setText(String.valueOf(pick.timeToNext()));
+        distanceToNextLabel.setText(String.valueOf(pick.distance()));
+
         numberExitingLabel.setText(String.valueOf(pick.getNextExit()));
         numberBoardingLabel.setText(String.valueOf(pick.getNextBoard()));
         updatedCountLabel.setText(String.valueOf(pick.getRiders() - pick.getNextExit() + pick.getNextBoard()));
