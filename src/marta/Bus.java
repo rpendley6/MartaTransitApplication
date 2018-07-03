@@ -146,10 +146,8 @@ public class Bus {
      *
      * @return the time to travel to the next stop based on distance and speed
      */
-    public double timeToNext() {
-        double time = (distance() * 60) / speed;
-        DecimalFormat df = new DecimalFormat("#.##");
-        time = Double.valueOf(df.format(time));
+    public int timeToNext() {
+        int time = 1 + ((int) distance() * 60) / speed;
         return time;
     }
 
