@@ -1,5 +1,6 @@
 package marta;
 
+import java.text.DecimalFormat;
 import java.util.Objects;
 import java.util.Random;
 
@@ -135,7 +136,10 @@ public class Bus {
         }
         double h = Math.abs(next.getLongitude() - current.getLongitude());
         double w = Math.abs(next.getLatitude() - current.getLatitude());
-        return hypotenuse(h, w);
+        double d = hypotenuse(h, w) * 70;
+        DecimalFormat df = new DecimalFormat("#.##");
+        d = Double.valueOf(df.format(d));
+        return d;
     }
 
     /**
@@ -143,7 +147,10 @@ public class Bus {
      * @return the time to travel to the next stop based on distance and speed
      */
     public double timeToNext() {
-        return distance() / speed;
+        double time = (distance() * 60) / speed;
+        DecimalFormat df = new DecimalFormat("#.##");
+        time = Double.valueOf(df.format(time));
+        return time;
     }
 
     /**
