@@ -147,8 +147,7 @@ public class Bus {
      * @return the time to travel to the next stop based on distance and speed
      */
     public int timeToNext() {
-        int time = 1 + ((int) distance() * 60) / speed;
-        return time;
+        return 1 + ((int) distance() * 60) / speed;
     }
 
     /**
