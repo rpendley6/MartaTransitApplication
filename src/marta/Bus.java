@@ -2,11 +2,13 @@ package marta;
 
 import java.text.DecimalFormat;
 import java.util.Objects;
+import java.util.PriorityQueue;
 import java.util.Random;
 
+import static information.ReadCSV.getBuses;
 import static information.ReadCSV.getRoutes;
 
-public class Bus {
+public class Bus implements Comparable<Bus> {
     private int id;
     private int route;
     private int location;
@@ -152,6 +154,18 @@ public class Bus {
 
     /**
      *
+     */
+    public Bus nextToArrive() {
+        PriorityQueue<Bus> pQueue = new PriorityQueue<>(getBuses());
+        Bus nextBus = pQueue.remove();
+        nextBus.moveStops();
+        nextBus.arrive();
+        pQueue.add(nextBus);
+        return nextBus;
+    }
+
+    /**
+     *
      * @param h difference in latitude
      * @param w difference in longitude
      * @return hypotenuse of differences
@@ -160,6 +174,12 @@ public class Bus {
         return Math.sqrt(h * h + w * w);
     }
 
+
+    @Override
+    public int compareTo(Bus b1) {
+        return this.timeToNext() - b1.timeToNext();
+    }
+    
     @Override
     public int hashCode() {
         return Objects.hash(id, route, location, riders, speed);
