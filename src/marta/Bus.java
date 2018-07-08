@@ -1,5 +1,6 @@
 package marta;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.Objects;
 import java.util.PriorityQueue;
@@ -8,7 +9,7 @@ import java.util.Random;
 import static information.ReadCSV.getBuses;
 import static information.ReadCSV.getRoutes;
 
-public class Bus implements Comparable<Bus> {
+public class Bus implements Comparable<Bus>, Serializable {
     private int id;
     private int route;
     private int location;
@@ -50,6 +51,7 @@ public class Bus implements Comparable<Bus> {
         riders += nextBoard;
         nextExit = exit();
         nextBoard = board();
+        moveStops();
     }
 
     /**
@@ -150,18 +152,6 @@ public class Bus implements Comparable<Bus> {
      */
     public int timeToNext() {
         return 1 + ((int) distance() * 60) / speed;
-    }
-
-    /**
-     *
-     */
-    public Bus nextToArrive() {
-        PriorityQueue<Bus> pQueue = new PriorityQueue<>(getBuses());
-        Bus nextBus = pQueue.remove();
-        nextBus.moveStops();
-        nextBus.arrive();
-        pQueue.add(nextBus);
-        return nextBus;
     }
 
     /**

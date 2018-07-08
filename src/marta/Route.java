@@ -1,9 +1,10 @@
 package marta;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Route {
+public class Route implements Serializable {
     private int id;
     private String name;
     private Stop[] path;
