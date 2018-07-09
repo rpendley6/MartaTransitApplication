@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -34,6 +35,31 @@
                      </children>
                   </AnchorPane>
               </content>
+            </Tab>
+            <Tab text="Simulation">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ToolBar layoutX="309.0" layoutY="14.0" prefHeight="45.0" prefWidth="183.0">
+                           <items>
+                              <Button mnemonicParsing="false" text="Run" />
+                              <Button mnemonicParsing="false" text="Pause" />
+                              <Button mnemonicParsing="false" text="Step" />
+                           </items>
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                        </ToolBar>
+                        <TableView editable="true" layoutX="175.0" layoutY="84.0" prefHeight="367.0" prefWidth="451.0">
+                          <columns>
+                            <TableColumn fx:id="busList" onEditStart="#selectBus" prefWidth="150.0" text="Bus" />
+                            <TableColumn fx:id="stopList" prefWidth="150.0" text="Stop" />
+                              <TableColumn prefWidth="150.0" text="Passengers" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </content>
             </Tab>
         </tabs>
       </TabPane>
