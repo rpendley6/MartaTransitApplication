@@ -1,20 +1,35 @@
 package marta;
 
+import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.Objects;
+import java.util.PriorityQueue;
+import java.util.Random;
 
-public class Bus {
+import static information.ReadCSV.getBuses;
+import static information.ReadCSV.getRoutes;
+
+public class Bus implements Comparable<Bus>, Serializable {
     private int id;
     private int route;
     private int location;
     private int riders;
     private int speed;
+    private int nextExit;
+    private int nextBoard;
+    private int stop;
+    private int stopCount;
 
-    public Bus(int id, int route, int location, int riders, int speed) {
+    public Bus(int id, int route, int location, int riders, int speed, int stop, int stopCount) {
         this.id = id;
         this.route = route;
         this.location = location;
         this.riders = riders;
         this.speed = speed;
+        nextExit = exit();
+        nextBoard = board();
+        this.stop = stop;
+        this.stopCount = stopCount;
     }
 
     @Override
@@ -27,9 +42,145 @@ public class Bus {
                 speed == bus.speed;
     }
 
+    /**
+     * Performs the changes on the riders based on the numbers generated and then generates
+     * a new set of nextExit and nextBoard numbers
+     */
+    public void arrive() {
+        riders -= nextExit;
+        riders += nextBoard;
+        nextExit = exit();
+        nextBoard = board();
+        moveStops();
+    }
+
+    /**
+     * Calculates the number exiting either random between 2 and 5(inclusive) or 2 and the current number of riders(inclusive)
+     * @return random int
+     */
+    public int exit() {
+        if (riders < 5) {
+            if (riders < 2) {
+                return riders;
+            }
+            return randomNumber(2, riders);
+        }
+        return randomNumber(2, 5);
+    }
+
+    /**
+     * Calculates the number boarding
+     * @return random int between 0 and 10
+     */
+    public int board() {
+        return randomNumber(0, 10);
+    }
+
+    /**
+     * Generates a random number between min and max (inclusive).
+     * @param min
+     * @param max
+     * @return random number
+     */
+    public int randomNumber(int min, int max){
+        Random rand = new Random();
+        int randomNumber = rand.nextInt((max - min) + 1) + min;
+        return randomNumber;
+    }
+
+    public void moveStops() {
+        Stop[] path = null;
+        for (Route r: getRoutes()) {
+            if (r.getId() == route) {
+                path = r.getPath();
+            }
+        }
+        if (stopCount < path.length - 1) {
+            stopCount++;
+        } else {
+            stopCount = 0;
+        }
+        stop = getNextStop();
+    }
+    /**
+     *
+     * @return the id of the next stop on the route
+     */
+    public int getNextStop() {
+        Stop[] path = null;
+        for (Route r: getRoutes()) {
+            if (r.getId() == route) {
+                path = r.getPath();
+            }
+        }
+        if (stopCount < path.length - 1) {
+            return path[stopCount + 1].getId();
+        } else {
+            return path[0].getId();
+        }
+    }
+
+    /**
+     *
+     * @return the distance between the current stop and next stop
+     */
+    public double distance() {
+        Stop[] path = null;
+        Stop next;
+        for (Route r: getRoutes()) {
+            if (r.getId() == route) {
+                path = r.getPath();
+            }
+        }
+        Stop current = path[stopCount];
+        if (stopCount < path.length - 1) {
+            next = path[stopCount + 1];
+        } else {
+            next = path[0];
+        }
+        double h = Math.abs(next.getLongitude() - current.getLongitude());
+        double w = Math.abs(next.getLatitude() - current.getLatitude());
+        double d = hypotenuse(h, w) * 70;
+        DecimalFormat df = new DecimalFormat("#.##");
+        d = Double.valueOf(df.format(d));
+        return d;
+    }
+
+    /**
+     *
+     * @return the time to travel to the next stop based on distance and speed
+     */
+    public int timeToNext() {
+        return 1 + ((int) distance() * 60) / speed;
+    }
+
+    /**
+     *
+     * @param h difference in latitude
+     * @param w difference in longitude
+     * @return hypotenuse of differences
+     */
+    public double hypotenuse(double h, double w) {
+        return Math.sqrt(h * h + w * w);
+    }
+
+
+    @Override
+    public int compareTo(Bus b1) {
+        return this.timeToNext() - b1.timeToNext();
+    }
+    
     @Override
     public int hashCode() {
         return Objects.hash(id, route, location, riders, speed);
+    }
+
+    public int getNextExit() {
+        return nextExit;
+    }
+
+    public int getNextBoard() {
+        return nextBoard;
     }
 
     public int getId() {
@@ -70,5 +221,13 @@ public class Bus {
 
     public void setSpeed(int speed) {
         this.speed = speed;
+    }
+
+    public int getStop() {
+        return stop;
+    }
+
+    public void setStop(int stop) {
+        this.stop = stop;
     }
 }
