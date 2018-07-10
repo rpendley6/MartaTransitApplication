@@ -27,7 +27,7 @@ public class BusInfo {
 
         currentStopLabel.setText(String.valueOf(pick.getStop()));
         nextStopLabel.setText(String.valueOf(pick.getNextStop()));
-        timeUntilNextLabel.setText(String.valueOf(pick.timeToNext()));
+        timeUntilNextLabel.setText(String.valueOf(pick.getTimeToNext()));
         distanceToNextLabel.setText(String.valueOf(pick.distance()));
 
         numberExitingLabel.setText(String.valueOf(pick.getNextExit()));

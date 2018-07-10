@@ -3,9 +3,7 @@ package sim;
 import marta.*;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.PriorityQueue;
-import information.ReadCSV;
 
 public class Simulation implements Serializable {
 
@@ -21,6 +19,10 @@ public class Simulation implements Serializable {
 
     public Bus nextToArrive() {
         Bus nextBus = pQueue.remove();
+        for(Object b: pQueue.toArray()) {
+            Bus bus = (Bus) b;
+            bus.setTimeToNext(bus.getTimeToNext() - nextBus.getTimeToNext());
+        }
         nextBus.arrive();
         pQueue.add(nextBus);
         return nextBus;

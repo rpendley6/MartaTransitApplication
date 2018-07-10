@@ -10,13 +10,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import marta.Bus;
 import marta.Route;
 import marta.Stop;
+import sim.Simulation;
 
 import java.io.IOException;
 import java.net.URL;
@@ -28,11 +29,17 @@ public class MainList implements Initializable {
     public static ArrayList<Bus> busList;
     public static ArrayList<Route> routeList;
     public static ArrayList<Stop> stopList;
+    public static Simulation sim = new Simulation();
 
     @FXML ListView busUIList;
     @FXML ListView routesUIList;
     @FXML ListView stopsUIList;
     @FXML Button logoutButton;
+
+    @FXML TableView<Bus> simList;
+    @FXML TableColumn<Bus, Integer> busCol;
+    @FXML TableColumn<Bus, Integer> stopCol;
+    @FXML TableColumn<Bus, Integer> passCol;
 
     @FXML
     public void logout(ActionEvent event) throws IOException{
@@ -41,9 +48,10 @@ public class MainList implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        busList = ReadCSV.getBuses();
-        routeList = ReadCSV.getRoutes();
-        stopList = ReadCSV.getStops();
+
+        busList = sim.data.busList;
+        routeList = sim.data.routeList;
+        stopList = sim.data.stopList;
 
         ObservableList oListBus = FXCollections.observableArrayList();
         for(Bus bus: busList) {
@@ -62,6 +70,11 @@ public class MainList implements Initializable {
             oListRoute.add(r.getName());
         }
         routesUIList.setItems(oListRoute);
+
+        busCol.setCellValueFactory(new PropertyValueFactory<Bus, Integer>("pId"));
+        stopCol.setCellValueFactory(new PropertyValueFactory<Bus, Integer>("pStop"));
+        passCol.setCellValueFactory(new PropertyValueFactory<Bus, Integer>("pass"));
+        simList.getItems().setAll(busList);
     }
 
     @FXML
@@ -104,5 +117,12 @@ public class MainList implements Initializable {
 
             stage.show();
         }
+    }
+
+    @FXML
+    public void step(ActionEvent event) {
+        System.out.println("Step");
+        sim.nextToArrive();
+        simList.getItems().setAll(sim.data.busList);
     }
 }

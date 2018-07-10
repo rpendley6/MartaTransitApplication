@@ -1,12 +1,12 @@
 package marta;
 
+import javafx.beans.property.SimpleIntegerProperty;
+
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.Objects;
-import java.util.PriorityQueue;
 import java.util.Random;
 
-import static information.ReadCSV.getBuses;
 import static information.ReadCSV.getRoutes;
 
 public class Bus implements Comparable<Bus>, Serializable {
@@ -19,17 +19,26 @@ public class Bus implements Comparable<Bus>, Serializable {
     private int nextBoard;
     private int stop;
     private int stopCount;
+    private int timeToNext;
+
+    public SimpleIntegerProperty pId;
+    public SimpleIntegerProperty pStop;
+    public SimpleIntegerProperty pass;
 
     public Bus(int id, int route, int location, int riders, int speed, int stop, int stopCount) {
         this.id = id;
+        pId = new SimpleIntegerProperty(id);
         this.route = route;
         this.location = location;
         this.riders = riders;
+        pass = new SimpleIntegerProperty(riders);
         this.speed = speed;
         nextExit = exit();
         nextBoard = board();
         this.stop = stop;
+        pStop = new SimpleIntegerProperty(stop);
         this.stopCount = stopCount;
+        calcTimeToNext();
     }
 
     @Override
@@ -47,10 +56,11 @@ public class Bus implements Comparable<Bus>, Serializable {
      * a new set of nextExit and nextBoard numbers
      */
     public void arrive() {
-        riders -= nextExit;
-        riders += nextBoard;
+        setRiders(riders - nextExit);
+        setRiders(riders += nextBoard);
         nextExit = exit();
         nextBoard = board();
+        calcTimeToNext();
         moveStops();
     }
 
@@ -100,7 +110,7 @@ public class Bus implements Comparable<Bus>, Serializable {
         } else {
             stopCount = 0;
         }
-        stop = getNextStop();
+        setStop(getNextStop());
     }
     /**
      *
@@ -150,8 +160,8 @@ public class Bus implements Comparable<Bus>, Serializable {
      *
      * @return the time to travel to the next stop based on distance and speed
      */
-    public int timeToNext() {
-        return 1 + ((int) distance() * 60) / speed;
+    public void calcTimeToNext() {
+        setTimeToNext(1 + ((int) distance() * 60) / speed);
     }
 
     /**
@@ -167,9 +177,17 @@ public class Bus implements Comparable<Bus>, Serializable {
 
     @Override
     public int compareTo(Bus b1) {
-        return this.timeToNext() - b1.timeToNext();
+        return this.timeToNext - b1.getTimeToNext();
     }
-    
+
+    public int getTimeToNext() {
+        return timeToNext;
+    }
+
+    public void setTimeToNext(int timeToNext) {
+        this.timeToNext = timeToNext;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(id, route, location, riders, speed);
@@ -189,6 +207,7 @@ public class Bus implements Comparable<Bus>, Serializable {
 
     public void setId(int id) {
         this.id = id;
+        pId.set(this.id);
     }
 
     public int getRoute() {
@@ -213,6 +232,7 @@ public class Bus implements Comparable<Bus>, Serializable {
 
     public void setRiders(int riders) {
         this.riders = riders;
+        pass.set(this.riders);
     }
 
     public int getSpeed() {
@@ -229,5 +249,34 @@ public class Bus implements Comparable<Bus>, Serializable {
 
     public void setStop(int stop) {
         this.stop = stop;
+        pStop.set(this.stop);
+    }
+
+    public int getStopCount() {
+        return stopCount;
+    }
+
+    public int getpId() {
+        return pId.get();
+    }
+
+    public SimpleIntegerProperty pIdProperty() {
+        return pId;
+    }
+
+    public int getpStop() {
+        return pStop.get();
+    }
+
+    public SimpleIntegerProperty pStopProperty() {
+        return pStop;
+    }
+
+    public int getPass() {
+        return pass.get();
+    }
+
+    public SimpleIntegerProperty passProperty() {
+        return pass;
     }
 }
