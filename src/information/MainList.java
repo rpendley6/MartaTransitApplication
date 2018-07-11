@@ -13,13 +13,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import marta.Bus;
 import marta.Route;
 import marta.Stop;
 import sim.Simulation;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -35,7 +36,8 @@ public class MainList implements Initializable {
     @FXML ListView routesUIList;
     @FXML ListView stopsUIList;
     @FXML Button logoutButton;
-
+    @FXML Button loadButton;
+    @FXML Button saveButton;
     @FXML TableView<Bus> simList;
     @FXML TableColumn<Bus, Integer> busCol;
     @FXML TableColumn<Bus, Integer> stopCol;
@@ -123,6 +125,40 @@ public class MainList implements Initializable {
     public void step(ActionEvent event) {
         System.out.println("Step");
         sim.nextToArrive();
+        simList.getItems().setAll(sim.data.busList);
+    }
+
+    @FXML
+    public void saveButtonPress(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save Simulation File");
+        File file = fileChooser.showSaveDialog(saveButton.getScene().getWindow());
+        try {
+            FileOutputStream fOut = new FileOutputStream(file);
+            ObjectOutputStream oOut = new ObjectOutputStream(fOut);
+            oOut.writeObject(sim);
+            oOut.close();
+            fOut.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void loadButtonPress(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose Simulation File");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Simulation (.sim)", "*.sim"));
+        File file = fileChooser.showOpenDialog(loadButton.getScene().getWindow());
+        try {
+            FileInputStream fIn = new FileInputStream(file);
+            ObjectInputStream oIn = new ObjectInputStream(fIn);
+            sim = (Simulation) oIn.readObject();
+            oIn.close();
+            fIn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         simList.getItems().setAll(sim.data.busList);
     }
 }
