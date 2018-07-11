@@ -104,12 +104,12 @@ public class Bus implements Comparable<Bus>, Serializable {
                 path = r.getPath();
             }
         }
+        setStop(getNextStop());
         if (stopCount < path.length - 1) {
             stopCount++;
         } else {
             stopCount = 0;
         }
-        setStop(getNextStop());
     }
     /**
      *
