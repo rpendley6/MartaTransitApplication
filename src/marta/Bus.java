@@ -20,10 +20,9 @@ public class Bus implements Comparable<Bus>, Serializable {
     private int stop;
     private int stopCount;
     private int timeToNext;
-
-    public SimpleIntegerProperty pId;
-    public SimpleIntegerProperty pStop;
-    public SimpleIntegerProperty pass;
+    private SimpleIntegerProperty pId;
+    private SimpleIntegerProperty pStop;
+    private SimpleIntegerProperty pass;
 
     public Bus(int id, int route, int location, int riders, int speed, int stop, int stopCount) {
         this.id = id;
@@ -68,7 +67,7 @@ public class Bus implements Comparable<Bus>, Serializable {
      * Calculates the number exiting either random between 2 and 5(inclusive) or 2 and the current number of riders(inclusive)
      * @return random int
      */
-    public int exit() {
+    private int exit() {
         if (riders < 5) {
             if (riders < 2) {
                 return riders;
@@ -82,8 +81,8 @@ public class Bus implements Comparable<Bus>, Serializable {
      * Calculates the number boarding
      * @return random int between 0 and 10
      */
-    public int board() {
-        return randomNumber(0, 10);
+    private int board() {
+        return randomNumber(2, 10);
     }
 
     /**
@@ -92,13 +91,13 @@ public class Bus implements Comparable<Bus>, Serializable {
      * @param max
      * @return random number
      */
-    public int randomNumber(int min, int max){
+    private int randomNumber(int min, int max){
         Random rand = new Random();
         int randomNumber = rand.nextInt((max - min) + 1) + min;
         return randomNumber;
     }
 
-    public void moveStops() {
+    private void moveStops() {
         Stop[] path = null;
         for (Route r: getRoutes()) {
             if (r.getId() == route) {
@@ -160,7 +159,7 @@ public class Bus implements Comparable<Bus>, Serializable {
      *
      * @return the time to travel to the next stop based on distance and speed
      */
-    public void calcTimeToNext() {
+    private void calcTimeToNext() {
         setTimeToNext(1 + ((int) distance() * 60) / speed);
     }
 
@@ -170,7 +169,7 @@ public class Bus implements Comparable<Bus>, Serializable {
      * @param w difference in longitude
      * @return hypotenuse of differences
      */
-    public double hypotenuse(double h, double w) {
+    private double hypotenuse(double h, double w) {
         return Math.sqrt(h * h + w * w);
     }
 
