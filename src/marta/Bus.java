@@ -138,6 +138,20 @@ public class Bus implements Comparable<Bus>, Serializable {
             stopCount = 0;
         }
     }
+
+    public Stop[] getPathWithoutNulls(Stop[] path) {
+        int j = 0;
+        for (int i = 0; i < path.length; i++) {
+            if (path[i] != null) {
+                j++;
+            }
+        }
+        Stop[] pathWithoutNulls = new Stop[j];
+        for (int i = 0; i < pathWithoutNulls.length; i++) {
+            pathWithoutNulls[i] = path[i];
+        }
+        return pathWithoutNulls;
+    }
     /**
      *
      * @return the id of the next stop on the route
@@ -149,6 +163,7 @@ public class Bus implements Comparable<Bus>, Serializable {
                 path = r.getPath();
             }
         }
+        path = getPathWithoutNulls(path);
         if (stopCount < path.length - 1) {
             return path[stopCount + 1].getId();
         } else {
@@ -168,7 +183,14 @@ public class Bus implements Comparable<Bus>, Serializable {
                 path = r.getPath();
             }
         }
-        Stop current = path[stopCount];
+        path = getPathWithoutNulls(path);
+        Stop current;
+        if (stopCount == path.length) {
+            current = path[0];
+            stopCount = 0;
+        } else {
+            current = path[stopCount];
+        }
         if (stopCount < path.length - 1) {
             next = path[stopCount + 1];
         } else {
