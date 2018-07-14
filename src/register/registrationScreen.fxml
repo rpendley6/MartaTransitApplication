@@ -1,28 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="register.RegistrationScreen">
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #9cc5a1;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="register.RegistrationScreen">
    <children>
-      <Label layoutX="296.0" layoutY="101.0" text="Register" AnchorPane.topAnchor="100.0">
+      <Label layoutX="296.0" layoutY="101.0" text="R e g i s t e r" AnchorPane.topAnchor="100.0">
          <font>
-            <Font name="Bell MT" size="60.0" />
+            <Font name="Yu Gothic Light" size="60.0" />
          </font>
       </Label>
-      <Label layoutX="252.0" layoutY="224.0" text="Username">
+      <Label layoutX="237.0" layoutY="225.0" text="Username">
          <font>
-            <Font name="Bell MT" size="25.0" />
+            <Font name="Yu Gothic Regular" size="25.0" />
          </font>
       </Label>
-      <Label layoutX="257.0" layoutY="261.0" text="Password">
+      <Label layoutX="243.0" layoutY="261.0" text="Password">
          <font>
-            <Font name="Bell MT" size="25.0" />
+            <Font name="Yu Gothic Regular" size="25.0" />
          </font>
       </Label>
       <TextField fx:id="usernameField" layoutX="364.0" layoutY="224.0" />
       <TextField fx:id="passwordField" layoutX="364.0" layoutY="260.0" />
-      <Button fx:id="registerButton" layoutX="477.0" layoutY="300.0" mnemonicParsing="false" onAction="#registerButtonHandler" text="Register" />
-      <Button fx:id="backButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backButtonHandler" text="&lt; Back" />
+      <Button fx:id="registerButton" layoutX="477.0" layoutY="300.0" mnemonicParsing="false" onAction="#registerButtonHandler" text="Register">
+         <font>
+            <Font name="Yu Gothic Regular" size="15.0" />
+         </font>
+         </Button>
+      <Button fx:id="backButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backButtonHandler" text="&lt; Back">
+         <font>
+            <Font name="Yu Gothic Regular" size="15.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

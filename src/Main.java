@@ -9,10 +9,13 @@ import sim.Simulation;
 
 import java.io.*;
 
+import javax.swing.table.*;
+
 public class Main extends Application {
 
+    static String path = "C:\\Users\\hespe\\Documents\\TeamDelta Marta\\src\\data.ser";
     private static Simulation sim = MainList.sim;
-    static String path = "C:\\Users\\Matthew\\Desktop\\TeamDelta Marta\\src\\data.ser";
+
 
     @Override
     public void start(Stage primaryStage) throws Exception{

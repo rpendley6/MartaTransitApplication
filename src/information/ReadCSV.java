@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class ReadCSV {
 
-    public static String CSVPATH = "C:\\Users\\Matthew\\Desktop\\TeamDelta Marta\\src\\information\\MARTA Simulation All Data.csv";
+    public static String CSVPATH = "C:\\Users\\hespe\\Documents\\TeamDelta-Marta\\src\\information\\MARTA Simulation All Data.csv";
 
 
     public static ArrayList<Bus> getBuses() {

@@ -5,15 +5,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="information.MainList">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #9CC5A1;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="information.MainList">
    <children>
-      <TabPane prefHeight="600.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="53.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <TabPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #9cc5a1;" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="53.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
           <Tab text="Buses">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ListView fx:id="busUIList" onMouseClicked="#selectBus" prefHeight="373.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <ListView fx:id="busUIList" onMouseClicked="#selectBus" prefHeight="373.0" prefWidth="600.0" style="-fx-background-color: #9CC5A1;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      </children>
                   </AnchorPane>
             </content>
@@ -22,7 +22,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ListView fx:id="stopsUIList" onMouseClicked="#selectStop" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <ListView fx:id="stopsUIList" onMouseClicked="#selectStop" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #9cc5a1;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      </children>
                   </AnchorPane>
             </content>
@@ -31,26 +31,26 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ListView fx:id="routesUIList" onMouseClicked="#selectRoute" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <ListView fx:id="routesUIList" onMouseClicked="#selectRoute" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #9cc5a1;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      </children>
                   </AnchorPane>
               </content>
             </Tab>
             <Tab text="Simulation">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #9cc5a1;">
                      <children>
-                        <ToolBar layoutX="309.0" layoutY="14.0" prefHeight="45.0" prefWidth="183.0">
+                        <ToolBar layoutX="309.0" layoutY="14.0" prefHeight="45.0" prefWidth="183.0" style="-fx-background-color: #49a078;">
                            <items>
-                              <Button mnemonicParsing="false" text="Run" />
-                              <Button mnemonicParsing="false" text="Pause" />
-                              <Button mnemonicParsing="false" onAction="#step" text="Step" />
+                              <Button mnemonicParsing="false" style="-fx-background-color: #dce1de;" text="Run" />
+                              <Button mnemonicParsing="false" style="-fx-background-color: #dce1de;" text="Pause" />
+                              <Button mnemonicParsing="false" onAction="#step" style="-fx-background-color: #dce1de;" text="Step" />
                            </items>
                            <effect>
                               <DropShadow />
                            </effect>
                         </ToolBar>
-                        <TableView fx:id="simList" editable="true" layoutX="175.0" layoutY="84.0" prefHeight="367.0" prefWidth="451.0">
+                        <TableView fx:id="simList" editable="true" layoutX="175.0" layoutY="84.0" prefHeight="367.0" prefWidth="451.0" style="-fx-background-color: #49a078;">
                           <columns>
                             <TableColumn fx:id="busCol" onEditStart="#selectBus" prefWidth="150.0" text="Bus" />
                             <TableColumn fx:id="stopCol" prefWidth="150.0" text="Stop" />
@@ -63,6 +63,6 @@
             </Tab>
         </tabs>
       </TabPane>
-      <Button fx:id="logoutButton" layoutX="734.0" layoutY="561.0" mnemonicParsing="false" onAction="#logout" text="Log Out" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+      <Button fx:id="logoutButton" layoutX="734.0" layoutY="561.0" mnemonicParsing="false" onAction="#logout" style="-fx-background-color: #DCD1DE;" text="Log Out" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
    </children>
 </AnchorPane>

@@ -1,7 +1,7 @@
 package information.bus;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import marta.Bus;
 
 public class BusInfo {
