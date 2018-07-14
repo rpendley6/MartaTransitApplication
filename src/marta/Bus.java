@@ -2,7 +2,7 @@ package marta;
 
 import javafx.beans.property.SimpleIntegerProperty;
 
-import java.io.Serializable;
+import java.io.*;
 import java.text.DecimalFormat;
 import java.util.Objects;
 import java.util.Random;
@@ -15,14 +15,14 @@ public class Bus implements Comparable<Bus>, Serializable {
     private int location;
     private int riders;
     private int speed;
-    private int nextExit;
-    private int nextBoard;
     private int stop;
     private int stopCount;
     private int timeToNext;
-    private SimpleIntegerProperty pId;
-    private SimpleIntegerProperty pStop;
-    private SimpleIntegerProperty pass;
+    private transient int nextExit;
+    private transient int nextBoard;
+    private transient SimpleIntegerProperty pId;
+    private transient SimpleIntegerProperty pStop;
+    private transient SimpleIntegerProperty pass;
 
     public Bus(int id, int route, int location, int riders, int speed, int stop, int stopCount) {
         this.id = id;
@@ -38,6 +38,33 @@ public class Bus implements Comparable<Bus>, Serializable {
         pStop = new SimpleIntegerProperty(stop);
         this.stopCount = stopCount;
         calcTimeToNext();
+    }
+
+    private void writeObject(ObjectOutputStream out) throws IOException {
+        out.writeInt(id);
+        out.writeInt(route);
+        out.writeInt(location);
+        out.writeInt(riders);
+        out.writeInt(speed);
+        out.writeInt(stop);
+        out.writeInt(stopCount);
+        out.writeInt(timeToNext);
+    }
+
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        id = in.readInt();
+        route = in.readInt();
+        location = in.readInt();
+        riders = in.readInt();
+        speed = in.readInt();
+        stop = in.readInt();
+        stopCount = in.readInt();
+        timeToNext = in.readInt();
+        nextBoard = board();
+        nextExit = exit();
+        pId = new SimpleIntegerProperty(id);
+        pStop = new SimpleIntegerProperty(stop);
+        pass = new SimpleIntegerProperty(riders);
     }
 
     @Override
@@ -104,12 +131,26 @@ public class Bus implements Comparable<Bus>, Serializable {
                 path = r.getPath();
             }
         }
+        setStop(getNextStop());
         if (stopCount < path.length - 1) {
             stopCount++;
         } else {
             stopCount = 0;
         }
-        setStop(getNextStop());
+    }
+
+    public Stop[] getPathWithoutNulls(Stop[] path) {
+        int j = 0;
+        for (int i = 0; i < path.length; i++) {
+            if (path[i] != null) {
+                j++;
+            }
+        }
+        Stop[] pathWithoutNulls = new Stop[j];
+        for (int i = 0; i < pathWithoutNulls.length; i++) {
+            pathWithoutNulls[i] = path[i];
+        }
+        return pathWithoutNulls;
     }
     /**
      *
@@ -122,6 +163,7 @@ public class Bus implements Comparable<Bus>, Serializable {
                 path = r.getPath();
             }
         }
+        path = getPathWithoutNulls(path);
         if (stopCount < path.length - 1) {
             return path[stopCount + 1].getId();
         } else {
@@ -141,7 +183,14 @@ public class Bus implements Comparable<Bus>, Serializable {
                 path = r.getPath();
             }
         }
-        Stop current = path[stopCount];
+        path = getPathWithoutNulls(path);
+        Stop current;
+        if (stopCount == path.length) {
+            current = path[0];
+            stopCount = 0;
+        } else {
+            current = path[stopCount];
+        }
         if (stopCount < path.length - 1) {
             next = path[stopCount + 1];
         } else {

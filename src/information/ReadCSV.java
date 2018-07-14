@@ -1,19 +1,30 @@
 package information;
 
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 import marta.Bus;
 import marta.Route;
 import marta.Stop;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 public class ReadCSV {
 
-    public static String CSVPATH = "C:\\Users\\hespe\\Documents\\TeamDelta-Marta\\src\\information\\MARTA Simulation All Data.csv";
+    public static String CSVPATH = null;
 
+    public static void chooseFile() {
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose Import File");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CVS (.csv)", "*.csv"));
+        File file = fileChooser.showOpenDialog(new Stage());
+        if (file == null) {
+            return;
+        }
+        CSVPATH = file.getPath();
+    }
 
     public static ArrayList<Bus> getBuses() {
         String csvFileToRead = CSVPATH;

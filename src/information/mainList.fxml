@@ -40,11 +40,11 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #9cc5a1;">
                      <children>
-                        <ToolBar layoutX="309.0" layoutY="14.0" prefHeight="45.0" prefWidth="183.0" style="-fx-background-color: #49a078;">
+                        <ToolBar layoutX="309.0" layoutY="14.0" prefHeight="45.0" prefWidth="183.0" style="-fx-background-color: #49a078;" AnchorPane.leftAnchor="309.0" AnchorPane.rightAnchor="308.0">
                            <items>
-                              <Button mnemonicParsing="false" style="-fx-background-color: #dce1de;" text="Run" />
-                              <Button mnemonicParsing="false" style="-fx-background-color: #dce1de;" text="Pause" />
-                              <Button mnemonicParsing="false" onAction="#step" style="-fx-background-color: #dce1de;" text="Step" />
+                              <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveButtonPress" text="Save" style="-fx-background-color: #dce1de;"/>
+                              <Button fx:id="loadButton" mnemonicParsing="false" onAction="#loadButtonPress" text="Load" style="-fx-background-color: #dce1de;"/>
+                              <Button mnemonicParsing="false" onAction="#step" text="Step" style="-fx-background-color: #dce1de;"/>
                            </items>
                            <effect>
                               <DropShadow />

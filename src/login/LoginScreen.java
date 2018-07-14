@@ -1,5 +1,6 @@
 package login;
 
+import information.ReadCSV;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +23,10 @@ public class LoginScreen {
     public void loginButtonAction(ActionEvent event) throws IOException{
         if(usernameField.getText().equals("user") && passwordField.getText().equals("pass")) {
             //Success
+            ReadCSV.chooseFile();
+            if(ReadCSV.CSVPATH == null) {
+                return;
+            }
             loginButton.getScene().setRoot(FXMLLoader.load(getClass().getResource("../information/mainList.fxml")));
         } else {
             //Error Screen
