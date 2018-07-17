@@ -42,21 +42,22 @@
                      <children>
                         <ToolBar layoutX="309.0" layoutY="14.0" prefHeight="45.0" prefWidth="183.0" style="-fx-background-color: #49a078;" AnchorPane.leftAnchor="309.0" AnchorPane.rightAnchor="308.0">
                            <items>
-                              <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveButtonPress" text="Save" style="-fx-background-color: #dce1de;"/>
-                              <Button fx:id="loadButton" mnemonicParsing="false" onAction="#loadButtonPress" text="Load" style="-fx-background-color: #dce1de;"/>
-                              <Button mnemonicParsing="false" onAction="#step" text="Step" style="-fx-background-color: #dce1de;"/>
+                              <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveButtonPress" style="-fx-background-color: #dce1de;" text="Save" />
+                              <Button fx:id="loadButton" mnemonicParsing="false" onAction="#loadButtonPress" style="-fx-background-color: #dce1de;" text="Load" />
+                              <Button mnemonicParsing="false" onAction="#step" style="-fx-background-color: #dce1de;" text="Step" />
                            </items>
                            <effect>
                               <DropShadow />
                            </effect>
                         </ToolBar>
-                        <TableView fx:id="simList" editable="true" layoutX="175.0" layoutY="84.0" prefHeight="367.0" prefWidth="451.0" style="-fx-background-color: #49a078;">
+                        <TableView fx:id="simList" editable="true" layoutX="175.0" layoutY="127.0" prefHeight="367.0" prefWidth="451.0" style="-fx-background-color: #49a078;">
                           <columns>
                             <TableColumn fx:id="busCol" onEditStart="#selectBus" prefWidth="150.0" text="Bus" />
                             <TableColumn fx:id="stopCol" prefWidth="150.0" text="Stop" />
                               <TableColumn fx:id="passCol" prefWidth="150.0" text="Passengers" />
                           </columns>
                         </TableView>
+                        <Button layoutX="357.0" layoutY="79.0" mnemonicParsing="false" style="-fx-background-color: dce1de;" text="View Map" />
                      </children>
                   </AnchorPane>
                </content>

@@ -1,5 +1,6 @@
 package information;
 
+import gui.*;
 import information.bus.BusInfo;
 import information.route.RouteInfo;
 import information.stop.StopInfo;
@@ -42,6 +43,7 @@ public class MainList implements Initializable {
     @FXML TableColumn<Bus, Integer> busCol;
     @FXML TableColumn<Bus, Integer> stopCol;
     @FXML TableColumn<Bus, Integer> passCol;
+    @FXML Button viewMapButton;
 
     @FXML
     public void logout(ActionEvent event) throws IOException{
@@ -160,5 +162,10 @@ public class MainList implements Initializable {
             e.printStackTrace();
         }
         simList.getItems().setAll(sim.data.busList);
+    }
+
+    @FXML
+    public void viewMapButtonPress(ActionEvent event) {
+        //launch map
     }
 }
