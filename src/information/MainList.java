@@ -203,11 +203,24 @@ public class MainList implements Initializable {
 
         Image busImg = new Image("/gui/bus.png", 20.0, 20.0, false, true);
 
-        //Place Busses
+        //Place Buses
         for (Bus b: sim.data.busList) {
             Stop stop = b.getCurrentStop();
             graphics.drawImage(busImg, stop.getLongitude() * wscale + 40, stop.getLatitude() * hscale + 40);
-            graphics.strokeText(String.valueOf(b.getId()), stop.getLongitude() * wscale + 60, stop.getLatitude() * hscale + 40);
+            if (stop.busesAtStop().size() <= 1) {
+                graphics.strokeText(String.valueOf(b.getId()), stop.getLongitude() * wscale + 60, stop.getLatitude() * hscale + 40);
+            } else {
+                String multiBusLabel = "";
+                for (Bus b1 : stop.busesAtStop()) {
+                    if (b1 != null) {
+                        multiBusLabel += b1.getId() + ", ";
+                    }
+                }
+                if (multiBusLabel.length() > 3) {
+                    multiBusLabel = multiBusLabel.substring(0, multiBusLabel.length() - 2);
+                }
+                graphics.strokeText(multiBusLabel, stop.getLongitude() * wscale + 60, stop.getLatitude() * hscale + 40);
+            }
         }
     }
 

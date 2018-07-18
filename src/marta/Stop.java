@@ -1,7 +1,9 @@
 package marta;
 
+import information.*;
+
 import java.io.Serializable;
-import java.util.Objects;
+import java.util.*;
 
 public class Stop implements Serializable {
     private int id;
@@ -61,5 +63,16 @@ public class Stop implements Serializable {
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
+    }
+
+    public Set<Bus> busesAtStop() {
+        Set<Bus> busesAtStop = new HashSet<>();
+        for (Bus b: MainList.sim.data.busList) {
+            if (b.getLocation() == this.getId()) {
+                busesAtStop.add(b);
+            }
+        }
+
+        return busesAtStop;
     }
 }

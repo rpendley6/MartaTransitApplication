@@ -24,4 +24,6 @@ public class Simulation implements Serializable {
         nextBus.arrive();
         pQueue.add(nextBus);
     }
+
+    public Store getData() { return this.data; }
 }

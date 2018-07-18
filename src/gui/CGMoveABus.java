@@ -19,8 +19,8 @@ import javax.swing.*;    // Using Swing's components and containers
 @SuppressWarnings("serial")
 public class CGMoveABus extends JFrame {
     // Define constants for the various dimensions
-    public static final int CANVAS_WIDTH = 500;
-    public static final int CANVAS_HEIGHT = 200;
+    public static final int CANVAS_WIDTH = 1000;
+    public static final int CANVAS_HEIGHT = 500;
     public static final Color LINE_COLOR = Color.BLACK;
     public static final Color CANVAS_BACKGROUND = new Color(156, 197, 161);
 
@@ -100,15 +100,30 @@ public class CGMoveABus extends JFrame {
         pack();           // pack all the components in the JFrame
         setVisible(true); // show it
         requestFocus();   // set the focus to JFrame to receive KeyEvent
-        mapInitialize(getGraphics());
+        mapInitialize();
     }
 
-    public void mapInitialize(Graphics g) {
+    public void mapInitialize() {
+
+        // Prepare an ImageIcon
+        ImageIcon icon = null;
+        String imgFilename = "gui/bus.png";
+        java.net.URL imgURL = getClass().getClassLoader().getResource(imgFilename);
+        if (imgURL != null) {
+            icon =  new ImageIcon(imgURL);
+        } else {
+            System.err.println("Couldn't find file: " + imgFilename);
+        }
+
+        // Prepare an Image object to be used by drawImage()
+        final Image img = icon.getImage();
+
         //draw route maps
-        for (marta.Route r : ReadCSV.getRoutes()) {
+        for (marta.Route r : MainList.sim.getData().routeList) {
             for (marta.Stop s : r.getPath()) {
-                Graphics rect = g.create((int) s.getLatitude(), (int) s.getLongitude(), 20, 20);
-                canvas.paintComponent(rect);
+                //Rectangle rect = new Rectangle((int) s.getLatitude(), (int) s.getLongitude(), 20, 20);
+                canvas.paintComponent(canvas.getGraphics());
+                //canvas.getGraphics().drawImage(img, (int) s.getLatitude(), (int) s.getLongitude(), null);
 
             }
         }
@@ -136,7 +151,7 @@ public class CGMoveABus extends JFrame {
         public void paintComponent(Graphics g) {
             // Prepare an ImageIcon
             ImageIcon icon = null;
-            String imgFilename = "gui/bus.png";
+            String imgFilename = "gui/side_bus.png";
             java.net.URL imgURL = getClass().getClassLoader().getResource(imgFilename);
             if (imgURL != null) {
                 icon =  new ImageIcon(imgURL);
