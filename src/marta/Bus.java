@@ -109,8 +109,7 @@ public class Bus implements Comparable<Bus>, Serializable {
      */
     private int randomNumber(int min, int max){
         Random rand = new Random();
-        int randomNumber = rand.nextInt((max - min) + 1) + min;
-        return randomNumber;
+        return rand.nextInt((max - min) + 1) + min;
     }
 
     private void moveStops() {
@@ -128,7 +127,7 @@ public class Bus implements Comparable<Bus>, Serializable {
         }
     }
 
-    public Stop[] getPathWithoutNulls(Stop[] path) {
+    private Stop[] getPathWithoutNulls(Stop[] path) {
         int j = 0;
         for (int i = 0; i < path.length; i++) {
             if (path[i] != null) {
@@ -277,7 +276,7 @@ public class Bus implements Comparable<Bus>, Serializable {
         return riders;
     }
 
-    public void setRiders(int riders) {
+    private void setRiders(int riders) {
         this.riders = riders;
     }
 
@@ -293,7 +292,7 @@ public class Bus implements Comparable<Bus>, Serializable {
         return stop;
     }
 
-    public void setStop(int stop) {
+    private void setStop(int stop) {
         this.stop = stop;
     }
 

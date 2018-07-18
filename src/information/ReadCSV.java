@@ -2,7 +2,6 @@ package information;
 
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import marta.Bus;
 import marta.Route;
 import marta.Stop;

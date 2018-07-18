@@ -17,12 +17,12 @@ import javax.swing.*;    // Using Swing's components and containers
  */
 
 @SuppressWarnings("serial")
-public class CGMoveABus extends JFrame {
+class CGMoveABus extends JFrame {
     // Define constants for the various dimensions
-    public static final int CANVAS_WIDTH = 500;
-    public static final int CANVAS_HEIGHT = 200;
-    public static final Color LINE_COLOR = Color.BLACK;
-    public static final Color CANVAS_BACKGROUND = new Color(156, 197, 161);
+    private static final int CANVAS_WIDTH = 500;
+    private static final int CANVAS_HEIGHT = 200;
+    private static final Color LINE_COLOR = Color.BLACK;
+    private static final Color CANVAS_BACKGROUND = new Color(156, 197, 161);
 
     // The moving bus is initially positioned in the upper left corner
     private int x1 = 10;
@@ -40,7 +40,7 @@ public class CGMoveABus extends JFrame {
     three methods: paintComponent(), paintBorder() and paintChilden().
      */
 
-    public CGMoveABus() {
+    private CGMoveABus() {
         // Set up a panel for the buttons
         JPanel btnPanel = new JPanel(new FlowLayout());
         JButton btnReset = new JButton("Reset <-");
@@ -103,7 +103,7 @@ public class CGMoveABus extends JFrame {
         mapInitialize(getGraphics());
     }
 
-    public void mapInitialize(Graphics g) {
+    private void mapInitialize(Graphics g) {
         //draw route maps
         for (marta.Route r : ReadCSV.getRoutes()) {
             for (marta.Stop s : r.getPath()) {

@@ -30,10 +30,10 @@ import java.util.ResourceBundle;
 
 public class MainList implements Initializable {
 
-    public static ArrayList<Bus> busList;
-    public static ArrayList<Route> routeList;
-    public static ArrayList<Stop> stopList;
-    public static Simulation sim = new Simulation();
+    private static ArrayList<Bus> busList;
+    private static ArrayList<Route> routeList;
+    private static ArrayList<Stop> stopList;
+    private static Simulation sim = new Simulation();
 
     @FXML ListView busUIList;
     @FXML ListView routesUIList;
@@ -162,7 +162,7 @@ public class MainList implements Initializable {
         drawMap();
     }
 
-    void setupMap() {
+    private void setupMap() {
         double height = 0.0;
         double width = 0.0;
         for (Stop s: sim.data.stopList) {

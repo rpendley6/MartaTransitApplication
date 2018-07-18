@@ -7,8 +7,8 @@ import java.util.PriorityQueue;
 
 public class Simulation implements Serializable {
 
-    public Store data;
-    private PriorityQueue<Bus> pQueue;
+    public final Store data;
+    private final PriorityQueue<Bus> pQueue;
 
     public Simulation() {
         data = new Store();
