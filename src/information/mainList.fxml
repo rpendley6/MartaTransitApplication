@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.canvas.*?>
 <?import javafx.scene.effect.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
@@ -50,14 +51,7 @@
                               <DropShadow />
                            </effect>
                         </ToolBar>
-                        <TableView fx:id="simList" editable="true" layoutX="175.0" layoutY="127.0" prefHeight="367.0" prefWidth="451.0" style="-fx-background-color: #49a078;">
-                          <columns>
-                            <TableColumn fx:id="busCol" onEditStart="#selectBus" prefWidth="150.0" text="Bus" />
-                            <TableColumn fx:id="stopCol" prefWidth="150.0" text="Stop" />
-                              <TableColumn fx:id="passCol" prefWidth="150.0" text="Passengers" />
-                          </columns>
-                        </TableView>
-                        <Button layoutX="357.0" layoutY="79.0" mnemonicParsing="false" style="-fx-background-color: dce1de;" text="View Map" />
+                        <Canvas fx:id="map" height="430.0" layoutY="79.0" width="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="79.0" />
                      </children>
                   </AnchorPane>
                </content>
