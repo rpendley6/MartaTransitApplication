@@ -12,10 +12,11 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("welcome/welcomeScreen.fxml"));
         primaryStage.setTitle("Team Delta Marta Simulation");
         primaryStage.setScene(new Scene(root, 800, 600));
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         launch(args);
     }
 }
