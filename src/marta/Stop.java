@@ -68,11 +68,14 @@ public class Stop implements Serializable {
     public Set<Bus> busesAtStop() {
         Set<Bus> busesAtStop = new HashSet<>();
         for (Bus b: MainList.sim.data.busList) {
-            if (b.getLocation() == this.getId()) {
+            if (b.getCurrentStop().getId() == this.getId()) {
                 busesAtStop.add(b);
             }
         }
-
+        System.out.println(getName());
+        for (Bus b : busesAtStop) {
+            System.out.println(b.getId());
+        }
         return busesAtStop;
     }
 }

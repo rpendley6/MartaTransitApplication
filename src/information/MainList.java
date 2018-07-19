@@ -33,7 +33,7 @@ public class MainList implements Initializable {
     private static ArrayList<Bus> busList;
     private static ArrayList<Route> routeList;
     private static ArrayList<Stop> stopList;
-    private static Simulation sim = new Simulation();
+    public static Simulation sim = new Simulation();
 
     @FXML ListView busUIList;
     @FXML ListView routesUIList;
